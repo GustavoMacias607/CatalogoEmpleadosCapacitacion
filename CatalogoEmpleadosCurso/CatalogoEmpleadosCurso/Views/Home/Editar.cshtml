@@ -1,0 +1,104 @@
+﻿@model CatalogoEmpleadosCurso.Models.EmpleadosViewModel
+
+@{
+    ViewBag.Title = "Detalles";
+}
+<style>
+    body {
+        background: rgb(194,174,238);
+        background: radial-gradient(circle, rgba(194,174,238,0.7206232834930848) 0%, rgba(148,183,233,0.8578781854538691) 100%);
+    }
+
+    h1 {
+        text-align: center;
+        padding: 15px;
+        margin: 10px;
+        letter-spacing: 3px;
+        word-spacing: 3px;
+        text-transform: uppercase;
+        text-shadow: 2px 2px 2px #ced4da;
+        border-bottom: dashed;
+    }
+
+    .formularios {
+        margin: 10px;
+        padding: 10px;
+        overflow: auto;
+        border: 2px solid;
+    }
+
+    .col {
+        padding: 10px;
+        margin: 10px;
+    }
+</style>
+<h1>Editar los datos del Empleado con el ID: @Model.Id</h1>
+
+@using (Html.BeginForm("Actualizar", "Home", FormMethod.Post))
+{
+    <div class="formularios">
+
+
+
+        <div>
+            <div class="col" style="float:left; display:none">
+                @Html.LabelFor(m => m.Id):<br />
+                @Html.TextBoxFor(m => m.Id, new { @class = "form-control" })
+            </div>
+        </div>
+        <div>
+            <div class="col" style="float:left">
+                @Html.LabelFor(m => m.Nombre):<br />
+                @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div>
+            <div class="col" style="float: left">
+                @Html.LabelFor(m => m.Apellido):<br />
+                @Html.TextBoxFor(m => m.Apellido, new { @class = "form-control" })
+            </div>
+        </div>
+        <div>
+            <div class="col" style="float:left">
+                @Html.LabelFor(m => m.RFC):<br />
+                @Html.TextBoxFor(m => m.RFC, new { @class = "form-control" })
+            </div>
+        </div>
+        <div>
+            <div class="col" style="float:left">
+                @Html.LabelFor(m => m.Email):<br />
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            </div>
+        </div>
+        <div>
+            <div class="col" style="float:left">
+                @Html.LabelFor(m => m.Telefono):<br />
+                @Html.TextBoxFor(m => m.Telefono, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div>
+            <div class="col" style="float:left">
+                @Html.LabelFor(m => m.Cumpleaños):<br />
+                <input type="date" name="Cumpleaños" id="Cumpleaños" value="@Model.Cumpleaños.ToString("yyyy-MM-dd")" class="form-control" />
+
+            </div>
+        </div>
+        <div>
+            <div class="col" style="float:left">
+                @Html.LabelFor(m => m.Puesto):
+                @Html.AntiForgeryToken()<br />
+                @Html.DropDownListFor(m => m.SeleccionId, new SelectList(Model.lista, "Id", "Name"), new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12" style="text-align:right">
+            <input type="submit" value="Actualizar" class="btn btn-primary" />
+            <a href="~/Home/Index" class="btn btn-danger">Regresar</a>
+        </div>
+    </div>
+
+}
+

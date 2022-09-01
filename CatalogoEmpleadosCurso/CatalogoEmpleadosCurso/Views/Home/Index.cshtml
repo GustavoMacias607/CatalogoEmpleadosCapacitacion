@@ -1,31 +1,235 @@
-﻿@{
+﻿@model CatalogoEmpleadosCurso.Models.EmpleadosViewModel
+@{
     ViewBag.Title = "Home Page";
-}
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+}
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+    body {
+        background: rgb(194,174,238);
+        background: radial-gradient(circle, rgba(194,174,238,0.7206232834930848) 0%, rgba(148,183,233,0.8578781854538691) 100%);
+    }
+
+    h1 {
+        text-align: center;
+        padding: 15px;
+        margin: 10px;
+        letter-spacing: 3px;
+        word-spacing: 3px;
+        text-transform: uppercase;
+        text-shadow: 2px 2px 2px #ced4da;
+        border-bottom: dashed;
+    }
+
+    .row {
+        margin-top: 2rem;
+    }
+
+    th, td {
+        border: 1px solid;
+    }
+
+    .acciones {
+        padding: 5px;
+        border: 1px solid;
+        background-color: rgb(225, 201, 113);
+        border-radius: 50%;
+        text-decoration: none;
+        color: black;
+    }
+
+        .acciones:hover {
+            border: 1px dashed;
+            background-color: rgb(193, 129, 207);
+            color: black;
+        }
+
+    .formularios {
+        margin: 10px;
+        padding: 10px;
+        overflow: auto;
+        border: 2px solid;
+    }
+
+    .col {
+        padding: 10px;
+    }
+</style>
+
+
+<div class="row">
+    <div class="col-12">
+        <h1>Catálogo de Empleados</h1>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-12" style="margin:15px; text-align:right">
+        <button style="background-color:antiquewhite; color:black; " type="button" class="btn btn-primary" data-toggle="modal" data-target="#AgregarEmpleado" data-whatever="">Agregar nuevo Empleado</button>
+    </div>
 </div>
 
 <div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <div class="col-12">
+        <table class="table table-hover" style="background-color: rgb(212, 185, 212)">
+            <thead style="background-color: dimgray; color:gainsboro">
+                <tr>
+                    <th>Id</th>
+                    <th>Fecha de Creación</th>
+                    <th>Nombre Completo</th>
+                    <th>RFC</th>
+                    <th>Email</th>
+                    <th>Teléfono</th>
+                    <th>Eliminado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.datos)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.CreationDate.ToString("dd/MM/yyyy")</td>
+                        <td>@item.Name @item.LastName</td>
+                        <td>@item.RFC</td>
+                        <td>@item.Email</td>
+                        <td>@item.PhoneNumber</td>
+                        <td style="text-align:center">
+                            @if (item.IsDeleted == false)
+                            {
+                            }
+                            else
+                            {
+                                <input style="width: 20px; height: 20px;" type="checkbox" checked="@item.IsDeleted" />
+                            }
+
+                        </td>
+                        <td>
+
+                            <a href="~/Home/Detalles/@item.Id" title="Ver Detalles" class="material-icons acciones">visibility</a>
+                            <a href="~/Home/Editar/@item.Id" title="Editar Empleado" class="material-icons acciones">edit_square</a>
+                            @if (item.IsDeleted == false)
+                            {
+
+                                <button style="background-color:rgb(238, 83, 83)" type="submit" id="btnEliminar" onclick="Elim(@item.Id)" title="Eliminar" class="material-icons acciones" data-idEmpleado="@item.Id" data-toggle="modal" data-target="#Eliminar">delete</button>
+
+
+                            }
+                            else
+                            {
+                                <button style="background-color:rgb(159, 223, 93)" type="submit" id="btnEliminar" onclick="Elim(@item.Id)" title="Activar" class="material-icons acciones" data-idEmpleado="@item.Id" data-toggle="modal" data-target="#Eliminar">check_circle</button>
+
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>
+
+
+<div class="modal fade" id="AgregarEmpleado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLabel">Agregar Nuevo Empleado</h2>
+
+                @using (Html.BeginForm("Guardar", "Home", FormMethod.Post))
+                {
+                    <div class="formularios">
+                        <div>
+                            <div class="col" style="float:left">
+                                @Html.LabelFor(m => m.Nombre):
+                                <br />
+                                @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control", placeholder = "Ingrese el Nombre" })
+                            </div>
+                        </div>
+                        <div>
+                            <div class="col" style="float:left">
+                                @Html.LabelFor(m => m.Apellido):
+                                <br />
+                                @Html.TextBoxFor(m => m.Apellido, new { @class = "form-control", placeholder = "Ingrese el Apellido" })
+                            </div>
+
+                            <div class="col" style="float:left">
+                                @Html.LabelFor(m => m.RFC):
+                                <br />
+                                @Html.TextBoxFor(m => m.RFC, new { @class = "form-control", placeholder = "Ingrese el RFC" })
+                            </div>
+                        </div>
+                        <div>
+                            <div class="col" style="float:left">
+                                @Html.LabelFor(m => m.Email):
+                                <br />
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Ingrese el Email" })
+                            </div>
+                        </div>
+                        <div>
+                            <div class="col" style="float:left">
+                                @Html.LabelFor(m => m.Telefono):
+                                <br />
+                                @Html.TextBoxFor(m => m.Telefono, new { @class = "form-control", placeholder = "Ingrese Telefono" })
+                            </div>
+                        </div>
+                        <div>
+                            <div class="col" style="float:left">
+                                @Html.LabelFor(m => m.Cumpleaños):
+                                <br />
+                                <input type="date" name="Cumpleaños" id="Cumpleaños" class="form-control" />
+                            </div>
+                        </div>
+                        <div>
+                            <div class="col" style="float:left">
+                                @Html.LabelFor(m => m.Puesto):
+                                @Html.AntiForgeryToken()<br />
+                                @Html.DropDownListFor(m => m.SeleccionId, new SelectList(Model.lista, "Id", "Name"), new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div>
+                        </div>
+                    </div>
+                    <div style="text-align:right">
+                        <input type="submit" value="Guardar" class="btn btn-primary" />
+                        <a href="~/Home/index" class="btn btn-danger">Cerrar</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="Eliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                @using (Html.BeginForm("isDeleted", "Home", FormMethod.Post))
+                {
+                    <h2 class="modal-title" id="exampleModalLabel">Eliminar / Activar empleado</h2>
+
+                    <div class="modal-body" style="display: inline-block">
+                        <div>
+                            <h6 class="modal-title" id="exampleModalLongTitle">Está seguro que desea eliminar/activar al empleado con el id:<input type="text" name="Id" id="Id" style="border:0px " /></h6>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+
+                        <input type="submit" value="Si" class="btn btn-primary" />
+                        <a href="~/Home/index" class="btn btn-danger">Cancelar</a>
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function Elim(id) {
+        $('#Id').val(id);
+    }
+</script>

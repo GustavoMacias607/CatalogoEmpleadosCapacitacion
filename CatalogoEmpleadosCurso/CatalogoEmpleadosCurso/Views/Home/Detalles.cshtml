@@ -1,0 +1,96 @@
+﻿@model CatalogoEmpleadosCurso.Models.EmpleadosViewModel
+
+@{
+    ViewBag.Title = "Detalles";
+}
+<style>
+    body {
+        background: rgb(194,174,238);
+        background: radial-gradient(circle, rgba(194,174,238,0.7206232834930848) 0%, rgba(148,183,233,0.8578781854538691) 100%);
+    }
+
+    h1 {
+        text-align: center;
+        padding: 15px;
+        margin: 10px;
+        letter-spacing: 3px;
+        word-spacing: 3px;
+        text-transform: uppercase;
+        text-shadow: 2px 2px 2px #ced4da;
+        border-bottom: dashed;
+    }
+
+    .formularios {
+        margin: 10px;
+        padding: 10px;
+        overflow: auto;
+        border: 2px solid;
+    }
+
+    .col {
+        padding: 10px;
+        margin: 10px;
+    }
+</style>
+<h1>Detalles del Empleado con el ID: @Model.Id</h1>
+
+@using (Html.BeginForm("Index", "Home"))
+{
+    <div class="formularios">
+
+        <div>
+            <div class="col" style="float:left">
+                @Html.LabelFor(m => m.FechaCreate):<br />
+                @Html.TextBoxFor(m => m.FechaCreate, new { @class = "form-control", disabled = "true" })
+            </div>
+        </div>
+        <div>
+            <div class="col" style="float:left">
+                @Html.LabelFor(m => m.Nombre):<br />
+                @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control", disabled = "true" })
+            </div>
+        </div>
+
+        <div>
+            <div class="col" style="float: left">
+                @Html.LabelFor(m => m.Apellido):<br />
+                @Html.TextBoxFor(m => m.Apellido, new { @class = "form-control", disabled = "true" })
+            </div>
+        </div>
+        <div>
+            <div class="col" style="float:left">
+                @Html.LabelFor(m => m.RFC):<br />
+                @Html.TextBoxFor(m => m.RFC, new { @class = "form-control", disabled = "true" })
+            </div>
+        </div>
+        <div>
+            <div class="col" style="float:left">
+                @Html.LabelFor(m => m.Email):<br />
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", disabled = "true" })
+            </div>
+        </div>
+        <div>
+            <div class="col" style="float:left">
+                @Html.LabelFor(m => m.Telefono):<br />
+                @Html.TextBoxFor(m => m.Telefono, new { @class = "form-control", disabled = "true" })
+            </div>
+        </div>
+        <div>
+            <div class="col" style="float:left">
+                @Html.LabelFor(m => m.Cumple):<br />
+                @Html.TextBoxFor(m => m.Cumple, new { @class = "form-control", disabled = "true" })
+            </div>
+        </div>
+        <div>
+            <div class="col" style="float:left">
+                @Html.LabelFor(m => m.Puesto):
+                @Html.AntiForgeryToken()<br />
+                @Html.TextBoxFor(m => m.Puesto, new { @class = "form-control", disabled = "true" })
+            </div>
+        </div>
+    </div>
+    <div style="text-align:right">
+        <a href="~/Home/Index" class="btn btn-danger">Regresar</a>
+    </div>
+
+}
