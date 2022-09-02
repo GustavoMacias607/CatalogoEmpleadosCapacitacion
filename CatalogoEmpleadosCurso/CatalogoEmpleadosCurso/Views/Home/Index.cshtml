@@ -164,7 +164,7 @@
                             <div class="col" style="float:left">
                                 @Html.LabelFor(m => m.Email):
                                 <br />
-                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Ingrese el Email" })
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Ingrese el Email", style = "width:300px" })
                             </div>
                         </div>
                         <div>
@@ -212,7 +212,8 @@
 
                     <div class="modal-body" style="display: inline-block">
                         <div>
-                            <h6 class="modal-title" id="exampleModalLongTitle">Está seguro que desea eliminar/activar al empleado con el id:<input type="text" name="Id" id="Id" style="border:0px " /></h6>
+                            <h4 class="modal-title" id="exampleModalLongTitle">Está seguro que desea eliminar/activar al empleado con el id:<input type="text" name="Id2" id="Id2" style="border:0px;width:25px " disabled="true" /></h4>
+                            <input type="text" name="Id" id="Id" style="border:0px; display:none;" />
                         </div>
                     </div>
 
@@ -231,5 +232,6 @@
 <script>
     function Elim(id) {
         $('#Id').val(id);
+        $('#Id2').val(id);
     }
 </script>
