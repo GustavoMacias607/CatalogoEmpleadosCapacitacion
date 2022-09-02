@@ -14,8 +14,9 @@ namespace CatalogoEmpleadosCurso.Models
 
         public List<PositionsGustavo> lista { get; set; }
 
-        public int SeleccionId { get; set; }
+        
         public int Id { get; set; }
+        [Display(Name = "Fecha de Creacion")]
         [DataType(DataType.Date)]
         public DateTime FechaCreacion { get; set; }
         public string Nombre { get; set; }
@@ -26,17 +27,9 @@ namespace CatalogoEmpleadosCurso.Models
         public string RFC { get; set; }
         public string Email { get; set; }
         public string Telefono { get; set; }
+        public int SeleccionId { get; set; }
         public bool Eliminado { get; set; }
         public string Puesto { get; set; }
-
-
-        [Display(Name = "Fecha de Creacion")]
-        public string FechaCreate { get; set; }
-        [Display(Name = "Fecha de Nacimiento")]
-        public string Cumple { get; set; }
-
-        public int idEmpleado { get; set; }
-
 
     }
 }
