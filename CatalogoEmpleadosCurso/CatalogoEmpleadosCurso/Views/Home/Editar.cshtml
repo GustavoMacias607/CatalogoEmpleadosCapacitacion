@@ -32,7 +32,7 @@
         margin: 10px;
     }
 </style>
-<h1>Editar los datos del Empleado con el ID: @Model.Id</h1>
+<h1>Editar los datos del Empleado con el id: @Model.Id</h1>
 
 @using (Html.BeginForm("Actualizar", "Home", FormMethod.Post))
 {
@@ -49,14 +49,14 @@
         <div>
             <div class="col" style="float:left">
                 @Html.LabelFor(m => m.Nombre):<br />
-                @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control", style = "width:250px" })
             </div>
         </div>
 
         <div>
             <div class="col" style="float: left">
                 @Html.LabelFor(m => m.Apellido):<br />
-                @Html.TextBoxFor(m => m.Apellido, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.Apellido, new { @class = "form-control", style = "width:250px" })
             </div>
         </div>
         <div>
@@ -68,7 +68,7 @@
         <div>
             <div class="col" style="float:left">
                 @Html.LabelFor(m => m.Email):<br />
-                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", style = "width:300px" })
             </div>
         </div>
         <div>
@@ -81,7 +81,7 @@
         <div>
             <div class="col" style="float:left">
                 @Html.LabelFor(m => m.Cumpleaños):<br />
-                <input type="date" name="Cumpleaños" id="Cumpleaños" value="@Model.Cumpleaños.ToString("yyyy-MM-dd")" class="form-control" />
+                <input type="date" name="Cumpleaños" id="Cumpleaños" value="@Model.Cumpleaños.ToString("yyyy-MM-dd")" class="form-control"  />
 
             </div>
         </div>
