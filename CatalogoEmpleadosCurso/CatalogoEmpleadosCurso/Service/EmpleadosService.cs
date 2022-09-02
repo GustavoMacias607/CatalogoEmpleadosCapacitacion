@@ -56,7 +56,7 @@ namespace CatalogoEmpleadosCurso.Service
         }
 
         /// <summary>
-        /// Metodo para guardar un nuevo Empleado
+        /// Metodo para Agregar un nuevo Empleado
         /// </summary>
         /// <param name="empleado"></param>
         public static void Agregar(EmployeesGustavo empleado)
@@ -75,6 +75,11 @@ namespace CatalogoEmpleadosCurso.Service
                 throw;
             }
         }
+        /// <summary>
+        /// Metodo para buscar un Empleado
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public static EmployeesGustavo FindEmpleado(int id)
         {
             var empleado = new EmployeesGustavo();
@@ -93,6 +98,11 @@ namespace CatalogoEmpleadosCurso.Service
             }
             return empleado;
         }
+        /// <summary>
+        /// Metodo para buscar el puesto 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public static PositionsGustavo FindPuesto(int id)
         {
             var puesto = new PositionsGustavo();
@@ -111,7 +121,10 @@ namespace CatalogoEmpleadosCurso.Service
             }
             return puesto;
         }
-
+        /// <summary>
+        /// Metodo para actualizar un empleado
+        /// </summary>
+        /// <param name="employee"></param>
         public static void Actualizar(EmployeesGustavo employee)
         {
             try

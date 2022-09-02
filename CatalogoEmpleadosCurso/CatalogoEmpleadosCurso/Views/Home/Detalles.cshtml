@@ -18,6 +18,7 @@
         text-transform: uppercase;
         text-shadow: 2px 2px 2px #ced4da;
         border-bottom: dashed;
+
     }
 
     .formularios {
@@ -32,7 +33,7 @@
         margin: 10px;
     }
 </style>
-<h1>Detalles del Empleado con el ID: @Model.Id</h1>
+<h1>Detalles del Empleado con el id: @Model.Id</h1>
 
 @using (Html.BeginForm("Index", "Home"))
 {
@@ -40,21 +41,23 @@
 
         <div>
             <div class="col" style="float:left">
-                @Html.LabelFor(m => m.FechaCreate):<br />
-                @Html.TextBoxFor(m => m.FechaCreate, new { @class = "form-control", disabled = "true" })
+                @Html.LabelFor(m => m.FechaCreacion):<br />
+                <input type="text" name="FechaCreacion" value="@Model.FechaCreacion.ToString("dd/MM/yyyy")"class = "form-control", disabled = "disabled"  />
+
+                
             </div>
         </div>
         <div>
             <div class="col" style="float:left">
                 @Html.LabelFor(m => m.Nombre):<br />
-                @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control", disabled = "true" })
+                @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control", disabled = "true", style = "width:250px" })
             </div>
         </div>
 
         <div>
             <div class="col" style="float: left">
                 @Html.LabelFor(m => m.Apellido):<br />
-                @Html.TextBoxFor(m => m.Apellido, new { @class = "form-control", disabled = "true" })
+                @Html.TextBoxFor(m => m.Apellido, new { @class = "form-control", disabled = "true", style = "width:250px" })
             </div>
         </div>
         <div>
@@ -66,7 +69,7 @@
         <div>
             <div class="col" style="float:left">
                 @Html.LabelFor(m => m.Email):<br />
-                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", disabled = "true" })
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", disabled = "true", style = "width:300px" })
             </div>
         </div>
         <div>
@@ -77,8 +80,8 @@
         </div>
         <div>
             <div class="col" style="float:left">
-                @Html.LabelFor(m => m.Cumple):<br />
-                @Html.TextBoxFor(m => m.Cumple, new { @class = "form-control", disabled = "true" })
+                @Html.LabelFor(m => m.Cumpleaños):<br />
+                <input type="text" name="Cumpleaños" value="@Model.Cumpleaños.ToString("dd/MM/yyyy")"class = "form-control", disabled = "disabled" />
             </div>
         </div>
         <div>
